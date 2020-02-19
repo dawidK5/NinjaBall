@@ -1,0 +1,42 @@
+Ninja Ball
+
+pinball inspired platformer
+
+journey to the top of the tower to defeat the evil shougun
+while avoiding pinball inspired traps and enemies and use the environment to
+your advantage to propel yourself through the level.
+
+<character concept art here. and basic diagram of control scheme.>
+ninja ball should use a fairly basic platformer move set, left right and jump
+whule also being able to press down to "sneak" or interact with certain objects.
+
+*sneaking, possible uses,
+make less noise dont alert enemies,
+slow down for more acurate movement,
+will not allow to fall of edge,
+go behind certain objects(furniture tapestries etc) to not be seen
+
+<level example>
+
+the levels of ninjaball are designed to fit the shape of most standard phone screens and to utilise the verticality this provides for
+a different feel of platformer as you try to ascend the tower, each level will see you moving upwards towards the goal and utilizing
+the various objects such as bumpers flippers switches and doors.
+
+objects to be used <concept art for each shown beside these summaries>
+spikes,  kill upon contact
+bumpers, use bounce to move ball back in the direction it hit the bumper from.
+flippers, throw ball in a certain direction.
+spring, fire ball into the next level
+
+*possible object inclusions*
+furniture tapestries etc, objects to be hidden behind while sneaking in stealth sections
+saw blades, moving obstacles that kill on contact.
+switches, flipped to triger certain events, doors opening enemies turning on etc, 
+doors, open/ close to deny/allow passage.
+enemies, walk around, visible rectangle of vision, attack and  kill on sight(possibly have an idle animation which can be turned on/off by jumping on the enemies head).
+#
+*maybe talk about boss fight*
+
+
+
+
