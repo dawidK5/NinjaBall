@@ -39,7 +39,7 @@ function scene:create( event )
 	background.anchorY = 0
 	background:setFillColor( .5 )
 	
-	-- make a crate (off-screen), position it, and rotate slightly
+	-- [[make a crate (off-screen), position it, and rotate slightly
 	--local crate = display.newImageRect( "crate.png", 90, 90 )
 	--crate.x, crate.y = 160, -100
 	--crate.rotation = 15
@@ -47,10 +47,30 @@ function scene:create( event )
 	-- add physics to the crate
 	--physics.addBody( crate, { density=1.0, friction=0.3, bounce=0.3 } )
 	
-	--make ninjaball
+	--make ninjaball]]
 	local ball = display.newImageRect( "protoball.png", 90, 90 )
 	ball.x, ball.y = 160, -100
-	ball.rotation = 15
+	ball.rotation = 0
+	
+	--places buttons
+	local left = display.newRect(display.screenOriginX, display.screenOriginY + screenH*0.9, screenW/3, screenH/10 )
+	left.anchorX = 0 
+	left.anchorY = 0
+	left:setFillColor( 1 )
+	
+	local right = display.newRect(display.screenOriginX + screenW/3, display.screenOriginY + screenH*0.9, screenW/3, screenH/10 )
+	right.anchorX = 0 
+	right.anchorY = 0
+	right:setFillColor( .9 )
+	
+	local jump = display.newRect(display.screenOriginX + screenW*2/3, display.screenOriginY + screenH*0.9, screenW/3, screenH/10 )
+	jump.anchorX = 0 
+	jump.anchorY = 0
+	jump:setFillColor( .8 )
+	--left.anchorX = 0
+	--left.anchorY = 1
+	
+	--grass.x, grass.y = display.screenOriginX, display.actualContentHeight + display.screenOriginY
 	
 	-- add physics to the crate
 	--physics.addBody( ball, "dynamic", {  radius=90, density 1.0, friction 0.3, bounce=0.3 } )
