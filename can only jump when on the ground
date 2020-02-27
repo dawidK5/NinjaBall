@@ -1,0 +1,28 @@
+local function touchAction( event )
+
+    if ( event.phase == "began" and balloon.sensorOverlaps > 0 ) then
+        -- Jump procedure here
+        local vx, vy = balloon:getLinearVelocity()
+        balloon:setLinearVelocity( vx, 0 )
+        balloon:applyLinearImpulse( nil, -75, balloon.x, balloon.y )
+    end
+end
+Runtime:addEventListener( "touch", touchAction )
+
+local function sensorCollide( self, event )
+
+    -- Confirm that the colliding elements are the foot sensor and a ground object
+    if ( event.selfElement == 2 and event.other.objType == "ground" ) then
+
+        -- Foot sensor has entered (overlapped) a ground object
+        if ( event.phase == "began" ) then
+            self.sensorOverlaps = self.sensorOverlaps + 1
+        -- Foot sensor has exited a ground object
+        elseif ( event.phase == "ended" ) then
+            self.sensorOverlaps = self.sensorOverlaps - 1
+        end
+    end
+end
+-- Associate collision handler function with character
+balloon.collision = sensorCollide
+balloon:addEventListener( "collision" )
