@@ -1,0 +1,77 @@
+-----------------------------------------------------------------------------------------
+--
+-- main.lua
+--
+-----------------------------------------------------------------------------------------
+
+local tapCount = 0
+
+local screenW, screenH, halfW = display.actualContentWidth, display.actualContentHeight, display.contentCenterX
+
+local background = display.newImageRect( "background.png", 360, 570 )
+background.x = display.contentCenterX
+background.y = display.contentCenterY
+
+local tapText = display.newText( tapCount, display.contentCenterX, 20, native.systemFont, 40)
+tapText:setFillColor( 0, 120, 0 )
+
+
+
+
+-- Set up physics engine
+local physics = require( "physics" )
+physics.start()
+physics.setDrawMode( "hybrid" )
+
+-- Create ground object
+local ground = display.newImageRect( "platform.png", 300, 50)
+ground.x = display.contentCenterX
+ground.y = display.contentHeight-25
+ground.objType = "ground"
+physics.addBody( ground, "static", { bounce=0.0, friction=0.3 } )
+
+-- Create character
+local balloon = display.newImageRect( "ninja_ball.png", 112, 112 )
+balloon.x = display.contentCenterX
+balloon.y = display.contentCenterY
+balloon.alpha = 0.8
+
+physics.addBody( balloon, "dynamic", { density=1.0, bounce=0.3}, {box={ halfWidth=30, halfHeight=10, x=0, y=60 }, isSensor=true } )
+balloon.isFixedRotation = true
+balloon.sensorOverlaps = 0
+
+local function touchAction( event )
+
+    if ( event.phase == "began" and balloon.sensorOverlaps > 0 ) then
+        -- Jump procedure here
+        local vx, vy = balloon:getLinearVelocity()
+        balloon:setLinearVelocity( vx, 0 )
+        balloon:applyLinearImpulse( nil, -75, balloon.x, balloon.y )
+    end
+end
+
+
+local function sensorCollide( self, event )
+
+    -- Confirm that the colliding elements are the foot sensor and a ground object
+    if ( event.selfElement == 2 and event.other.objType == "ground" ) then
+
+        -- Foot sensor has entered (overlapped) a ground object
+        if ( event.phase == "began" ) then
+            self.sensorOverlaps = self.sensorOverlaps + 1
+        -- Foot sensor has exited a ground object
+        elseif ( event.phase == "ended" ) then
+            self.sensorOverlaps = self.sensorOverlaps - 1
+        end
+    end
+end
+-- Associate collision handler function with character
+balloon.collision = sensorCollide
+balloon:addEventListener( "collision" )
+
+local left = display.newRect(display.screenOriginX, display.screenOriginY + screenH*0.9, screenW/3, screenH/10 )
+left.anchorX = 0
+left.anchorY = 0
+left:setFillColor( 1 )
+
+left :addEventListener( "touch", touchAction )
