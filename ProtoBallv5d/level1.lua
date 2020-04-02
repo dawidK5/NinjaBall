@@ -82,7 +82,7 @@ function scene:create( event )
 	ground.x = display.contentCenterX
 	ground.y = display.contentHeight-250
 	ground.objType = "ground"
-	physics.addBody( ground, "static", {friction=2 } )
+	physics.addBody( ground, "static" )
 	
 	local bumper = display.newImageRect("bumper2.png", 160, 160)
 	bumper.x = 200
@@ -95,6 +95,7 @@ function scene:create( event )
 	spike.x = 600
 	spike.y = ground.y-49
 	spike.objType = "spike"
+	local spikeSensor
 	physics.addBody( spike, "static", {bounce=0, friction=0, isSensor = true} )
 	
 	sceneGroup:insert( background )
@@ -107,7 +108,7 @@ function scene:create( event )
 	sceneGroup:insert( jump )
 	-- add physics to the crate
 	physics.addBody( bumper, "static", {radius=80, bounce=2} )
-	physics.addBody( ball, "dynamic", { radius=45, density=1.0, bounce=0.5}, {box={ halfWidth=30, halfHeight=10, x=0, y=60}, isSensor=true } )
+	physics.addBody( ball, "dynamic", { radius=45, density=1.0, bounce=0.5 }, {box={ halfWidth=30, halfHeight=10, x=0, y=60}, isSensor=true } )
 	--ball.box.objType = "hitbox"
 	--ball.isFixedRotation = true
 	ball.sensorOverlaps = 0
@@ -115,7 +116,7 @@ function scene:create( event )
 	ball.rotation = 0
 	-- temp code
 	
-	local max, acceleration, leftM, rightM = 350, 120, 0, 0
+	local max, acceleration, leftM, rightM = 360, 120, 0, 0
     local lastEvent = {}
     local function movement ( event )
         local phase = event.phase
@@ -145,14 +146,18 @@ function scene:create( event )
 	local function enterFrame()
 		-- game loop
 		local vx, vy = ball:getLinearVelocity()
-		local dx = leftM + rightM
+		local dx = math.round(leftM + rightM)
+		print(dx)
+		print("isdx---")
+		print(vx)
+		print("is-vx---")
 		if midAir then 
 			dx = dx / 2 
 		end
 		if ( dx < 0 and vx > -max ) or ( dx > 0 and vx < max ) then
 			ball:applyForce( dx or 0, 0, ball.x, ball.y )
 		end
-		-- Turn around
+		
 		
 	end
 	Runtime:addEventListener( "enterFrame", enterFrame )
@@ -163,6 +168,7 @@ function scene:create( event )
 		physics.addBody( ball, "dynamic", { radius=45, density=1.0, bounce=0.5}, {box={ halfWidth=30, halfHeight=10, x=0, y=60}, isSensor=true } )
 		ball.x = initPosX
 		ball.y = initPosY
+		ball:setLinearVelocity(0, 0)
 		vx=0
 		vy=0
 		ball.angularVelocity=0
