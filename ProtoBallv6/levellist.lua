@@ -39,13 +39,13 @@ function scene:create( event )
 	backgroundColor.anchorX = 0
 	backgroundColor.anchorY = 0
 	backgroundColor:setFillColor(0.25,0.13,0.06,1)
-	local background = display.newImageRect( "scroll.png", display.actualContentWidth, display.actualContentHeight )
+	local background = display.newImageRect( "img/scroll.png", display.actualContentWidth, display.actualContentHeight )
 	background.anchorX = 0
 	background.anchorY = 0
 	background.x = 0 + display.screenOriginX
 	background.y = 0 + display.screenOriginY
 	local levelsTable = {}
-	local character = display.newImageRect("ninja_ball.png", 290, 290)
+	local character = display.newImageRect("img/ninja_ball.png", 290, 290)
 	character.x = display.contentCenterX
 	character.y = screenH*0.65
 	-- create a widget button (which will loads level1.lua on release)
@@ -85,6 +85,7 @@ function scene:create( event )
 
 		-- all display objects must be inserted into group
 	sceneGroup:insert(character)
+
 
 end
 
@@ -127,6 +128,9 @@ function scene:destroy( event )
 	if playBtn then
 		playBtn:removeSelf()	-- widgets must be manually removed
 		playBtn = nil
+	end
+	if muted then
+		audio.dispose( backgroundMusic )
 	end
 end
 

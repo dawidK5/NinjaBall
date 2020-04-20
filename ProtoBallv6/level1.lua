@@ -24,18 +24,20 @@ function scene:create( event )
 	-- e.g. add display objects to 'sceneGroup', add touch listeners, etc.
 
 	local sceneGroup = self.view
-
-	-- We need physics started to add bodies, but we don't want the simulaton
+	if muted then
+		audio.setVolume(0)
+	end
+		-- We need physics started to add bodies, but we don't want the simulaton
 	-- running until the scene is on the screen.
 	physics.start()
 	physics.pause()
 
-
-
-	local background = display.newImageRect( "background.jpg", screenW, screenH*0.9 )
+	local background = display.newImageRect( "img/background.jpg", screenW, screenH*0.9 )
 
 	background.anchorX = 0
 	background.anchorY = 0
+
+
 	--background:setFillColor( .5 )
 
 	local boundaries = {}
@@ -62,7 +64,7 @@ function scene:create( event )
 	--local ball = display.newImageRect( "protoball.png", 90, 90 )
 	--ball.x, ball.y = 160, -100
 	--ball.rotation = 0
-	local ball = display.newImageRect( "ninja_ball.png", 60, 60 )
+	local ball = display.newImageRect( "img/ninja_ball.png", 60, 60 )
 	ball.x = display.contentCenterX
 	ball.y = display.contentCenterY
 	local initPosX = display.contentCenterX
@@ -72,46 +74,46 @@ function scene:create( event )
 	--ball.alpha = 0.8
 
 	--places buttons
-	local left = display.newImageRect( "left.png", screenW/3, screenH/10 )
+	local left = display.newImageRect( "img/left.png", screenW/3, screenH/10 )
 	left.x = originX
 	left.y = originY + screenH*0.9
 	left.anchorX = 0
 	left.anchorY = 0
-	left:setFillColor( 1 )
+	--left:setFillColor( 1 )
 	left.objType = "left"
 
-	local right = display.newImageRect( "right.png", screenW/3, screenH/10 )
+	local right = display.newImageRect( "img/right.png", screenW/3, screenH/10 )
 	right.x = originX + screenW/3
 	right.y = originY + screenH*0.9
 	right.anchorX = 0
 	right.anchorY = 0
-	right:setFillColor( .9 )
+	--right:setFillColor( .8 )
 	right.objType = "right"
 
-	local jump = display.newImageRect( "jump.png", screenW/3, screenH/10 )
+	local jump = display.newImageRect( "img/jump.png", screenW/3, screenH/10 )
 	jump.x = originX + screenW*2/3
 	jump.y = originY + screenH*0.9
 	jump.anchorX = 0
 	jump.anchorY = 0
-	jump:setFillColor( .8 )
+	--jump:setFillColor( .6 )
 
 	local midAir = false
 
 
-	local ground = display.newImageRect( "button.png", 800, 50)
+	local ground = display.newImageRect( "img/shelf.png", 800, 33)
 	ground.x = display.contentCenterX
-	ground.y = screenH*0.9
+	ground.y = screenH*0.9 - 16
 	ground.objType = "ground"
 	physics.addBody( ground, "static" )
 
-	local bumper = display.newImageRect("bumper2.png", 100, 100)
+	local bumper = display.newImageRect("img/bumper2.png", 100, 100)
 	bumper.x = 200
 	bumper.y = 950
 	bumper.objType = "bumper"
 	audio.setVolume(0.9)
-	local bumperSound = audio.loadSound("bumper.wav")
+	local bumperSound = audio.loadSound("sound/bumper.wav")
 
-	local spike = display.newImageRect("spikes2.png", 129, 49)
+	local spike = display.newImageRect("img/spikes2.png", 129, 49)
 	spike.x = 600
 	spike.y = ground.y-49
 	spike.objType = "spike"
