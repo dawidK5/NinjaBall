@@ -173,6 +173,7 @@ function scene:create( event )
 		vy=0
 		ball.angularVelocity=0
 		physics.start()
+		ball:setLinearVelocity(0, 0)
 		transition.to(ball, {time=1000, alpha=1})
 	end
 	local function death(self, event)
