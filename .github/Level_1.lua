@@ -1,0 +1,522 @@
+return {
+  version = "1.2",
+  luaversion = "5.1",
+  tiledversion = "2020.03.18",
+  orientation = "orthogonal",
+  renderorder = "right-down",
+  width = 23,
+  height = 36,
+  tilewidth = 33,
+  tileheight = 33,
+  nextlayerid = 5,
+  nextobjectid = 42,
+  properties = {},
+  tilesets = {
+    {
+      name = "Objects",
+      firstgid = 1,
+      filename = "Objects.tsx",
+      tilewidth = 404,
+      tileheight = 403,
+      spacing = 0,
+      margin = 0,
+      columns = 0,
+      objectalignment = "unspecified",
+      tileoffset = {
+        x = 0,
+        y = 0
+      },
+      grid = {
+        orientation = "orthogonal",
+        width = 1,
+        height = 1
+      },
+      properties = {},
+      terrains = {},
+      tilecount = 10,
+      tiles = {
+        {
+          id = 0,
+          image = "../final version of assets + references/bumper made by oscar.png",
+          width = 100,
+          height = 99
+        },
+        {
+          id = 1,
+          image = "../final version of assets + references/flipper made by dawid.png",
+          width = 223,
+          height = 60
+        },
+        {
+          id = 2,
+          image = "../final version of assets + references/shelfcrop.png",
+          width = 128,
+          height = 33
+        },
+        {
+          id = 3,
+          image = "../final version of assets + references/spring.png",
+          width = 34,
+          height = 51
+        },
+        {
+          id = 4,
+          image = "../final version of assets + references/spikes need to look for reference.png",
+          width = 140,
+          height = 61
+        },
+        {
+          id = 5,
+          image = "../../../../Downloads/New folder (2)/ProtoBallv4dCopy/button.png",
+          width = 154,
+          height = 40
+        },
+        {
+          id = 6,
+          image = "../../../../Downloads/New folder (2)/ProtoBallv4dCopy/woodenBackgroud.webp",
+          width = 401,
+          height = 280
+        },
+        {
+          id = 7,
+          image = "../../../../Downloads/New folder (2)/ProtoBallv4dCopy/ninja_ball.png",
+          width = 404,
+          height = 403
+        },
+        {
+          id = 8,
+          image = "../../../../Downloads/New folder (2)/ProtoBallv4dCopy/crate.png",
+          width = 90,
+          height = 90
+        },
+        {
+          id = 9,
+          image = "woodenBackgroud.webp",
+          width = 401,
+          height = 280
+        }
+      }
+    }
+  },
+  layers = {
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 2,
+      name = "background",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      properties = {},
+      objects = {
+        {
+          id = 41,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = -2.22222,
+          y = 1182.22,
+          width = 761,
+          height = 1177.78,
+          rotation = 0,
+          gid = 10,
+          visible = true,
+          properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 4,
+      name = "behind",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      properties = {},
+      objects = {
+        {
+          id = 32,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 315,
+          y = 393.889,
+          width = 50,
+          height = 50,
+          rotation = 0,
+          gid = 9,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 33,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 697.222,
+          y = 1053.89,
+          width = 50,
+          height = 50,
+          rotation = 0,
+          gid = 9,
+          visible = true,
+          properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 3,
+      name = "game layer ",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      properties = {},
+      objects = {
+        {
+          id = 1,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = -0.363636,
+          y = 1189.73,
+          width = 755.273,
+          height = 33,
+          rotation = 0,
+          gid = 3,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 2,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 448.889,
+          y = 384.586,
+          width = 60,
+          height = 60,
+          rotation = 0,
+          gid = 8,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 3,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 627.717,
+          y = 1090.33,
+          width = 128,
+          height = 33,
+          rotation = 0,
+          gid = 3,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 4,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 624.687,
+          y = 823.869,
+          width = 128,
+          height = 33,
+          rotation = 0,
+          gid = 3,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 5,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 331.939,
+          y = 887.364,
+          width = 128,
+          height = 33,
+          rotation = 0,
+          gid = 3,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 6,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 95.697,
+          y = 1026.82,
+          width = 128,
+          height = 33,
+          rotation = 0,
+          gid = 3,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 7,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 494.576,
+          y = 1157.36,
+          width = 464.364,
+          height = 33,
+          rotation = -90,
+          gid = 3,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 8,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 462.273,
+          y = 691.727,
+          width = 128,
+          height = 33,
+          rotation = 0,
+          gid = 3,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 12,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 155.333,
+          y = 428.091,
+          width = 370.424,
+          height = 33,
+          rotation = 0,
+          gid = 3,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 23,
+          name = "flipper",
+          type = "",
+          shape = "rectangle",
+          x = -14.6365,
+          y = 905.664,
+          width = 120,
+          height = 37,
+          rotation = 30,
+          gid = 2,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 24,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 80.5253,
+          y = 665.667,
+          width = 76,
+          height = 33,
+          rotation = 0,
+          gid = 3,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 25,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 188.576,
+          y = 667.222,
+          width = 238.828,
+          height = 33,
+          rotation = -90,
+          gid = 3,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 26,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 3.15152,
+          y = 528.697,
+          width = 76,
+          height = 33,
+          rotation = 0,
+          gid = 3,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 27,
+          name = "bumper",
+          type = "",
+          shape = "rectangle",
+          x = 574.97,
+          y = 322.545,
+          width = 120,
+          height = 120,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 28,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2.66667,
+          y = 198.818,
+          width = 452.242,
+          height = 33,
+          rotation = 0,
+          gid = 3,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 29,
+          name = "spikes",
+          type = "",
+          shape = "rectangle",
+          x = 193.636,
+          y = 163.525,
+          width = 140,
+          height = 61,
+          rotation = 0,
+          gid = 5,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 30,
+          name = "spring",
+          type = "",
+          shape = "rectangle",
+          x = 36.3333,
+          y = 166.808,
+          width = 34,
+          height = 51,
+          rotation = 0,
+          gid = 4,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 31,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 498.02,
+          y = 954.98,
+          width = 128,
+          height = 33,
+          rotation = 0,
+          gid = 3,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 34,
+          name = "bumper",
+          type = "",
+          shape = "rectangle",
+          x = 228.303,
+          y = 718.101,
+          width = 120,
+          height = 120,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {
+            ["bounce"] = 0
+          }
+        },
+        {
+          id = 35,
+          name = "spikes",
+          type = "",
+          shape = "rectangle",
+          x = -4.14141,
+          y = 1154.64,
+          width = 140,
+          height = 61,
+          rotation = 0,
+          gid = 5,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 36,
+          name = "spikes",
+          type = "",
+          shape = "rectangle",
+          x = 144.747,
+          y = 1156.86,
+          width = 140,
+          height = 61,
+          rotation = 0,
+          gid = 5,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 37,
+          name = "spikes",
+          type = "",
+          shape = "rectangle",
+          x = 286.97,
+          y = 1154.64,
+          width = 140,
+          height = 61,
+          rotation = 0,
+          gid = 5,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 38,
+          name = "spikes",
+          type = "",
+          shape = "rectangle",
+          x = 322.525,
+          y = 492.414,
+          width = 140,
+          height = 61,
+          rotation = 0,
+          gid = 1073741829,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 39,
+          name = "spikes",
+          type = "",
+          shape = "rectangle",
+          x = 191.414,
+          y = 492.414,
+          width = 140,
+          height = 61,
+          rotation = 0,
+          gid = 1073741829,
+          visible = true,
+          properties = {}
+        }
+      }
+    }
+  }
+}

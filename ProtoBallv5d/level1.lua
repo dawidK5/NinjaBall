@@ -18,7 +18,7 @@ local screenW, screenH, halfW = display.actualContentWidth, display.actualConten
 function scene:create( event )
 
 	-- Called when the scene's view does not exist.
-	-- 
+	--
 	-- INSERT code here to initialize the scene
 	-- e.g. add display objects to 'sceneGroup', add touch listeners, etc.
 
@@ -31,20 +31,20 @@ function scene:create( event )
 
 
 	local background = display.newRect( display.screenOriginX, display.screenOriginY, screenW, screenH )
-	background.anchorX = 0 
+	background.anchorX = 0
 	background.anchorY = 0
 	background:setFillColor( .5 )
-	
+
 	-- [[make a crate (off-screen), position it, and rotate slightly
 	--local crate = display.newImageRect( "crate.png", 90, 90 )
 	--crate.x, crate.y = 160, -100
 	--crate.rotation = 15
-	
+
 	-- add physics to the crate
 	--physics.addBody( crate, { density=1.0, friction=0.3, bounce=0.3 } )
-	
+
 	--make ninjaball
-	
+
 	--local ball = display.newImageRect( "protoball.png", 90, 90 )
 	--ball.x, ball.y = 160, -100
 	--ball.rotation = 0
@@ -56,48 +56,54 @@ function scene:create( event )
 	ball.rotation = 0
 	ball.objType = "ball"
 	--ball.alpha = 0.8
-	
+
 	--places buttons
-	local left = display.newRect(display.screenOriginX, display.screenOriginY + screenH*0.9, screenW/3, screenH/10 )
-	left.anchorX = 0 
+	local left = display.newImageRect( "left.png", screenW/3, screenH/10 )
+	left.x = display.screenOriginX
+	left.y = display.screenOriginY + screenH*0.9
+	left.anchorX = 0
 	left.anchorY = 0
 	left:setFillColor( 1 )
 	left.objType = "left"
-	
-	local right = display.newRect(display.screenOriginX + screenW/3, display.screenOriginY + screenH*0.9, screenW/3, screenH/10 )
-	right.anchorX = 0 
+
+	local right = display.newImageRect( "right.png", screenW/3, screenH/10 )
+	right.x = display.screenOriginX + screenW/3
+	right.y = display.screenOriginY + screenH*0.9
+	right.anchorX = 0
 	right.anchorY = 0
 	right:setFillColor( .9 )
 	right.objType = "right"
-	
-	local jump = display.newRect(display.screenOriginX + screenW*2/3, display.screenOriginY + screenH*0.9, screenW/3, screenH/10 )
-	jump.anchorX = 0 
+
+	local jump = display.newImageRect( "jump.png", screenW/3, screenH/10 )
+	jump.x = display.screenOriginX + screenW*2/3
+	jump.y = display.screenOriginY + screenH*0.9
+	jump.anchorX = 0
 	jump.anchorY = 0
 	jump:setFillColor( .8 )
-	
+
 	local midAir = false
-	
-	
+
+
 	local ground = display.newImageRect( "button.png", 800, 50)
 	ground.x = display.contentCenterX
 	ground.y = display.contentHeight-250
 	ground.objType = "ground"
 	physics.addBody( ground, "static" )
-	
+
 	local bumper = display.newImageRect("bumper2.png", 160, 160)
 	bumper.x = 200
 	bumper.y = 950
 	bumper.objType = "bumper"
 	audio.setVolume(0.9)
 	local bumperSound = audio.loadSound("bumper.wav")
-	
+
 	local spike = display.newImageRect("spikes2.png", 129, 49)
 	spike.x = 600
 	spike.y = ground.y-49
 	spike.objType = "spike"
 	local spikeSensor
 	physics.addBody( spike, "static", {bounce=0, friction=0, isSensor = true} )
-	
+
 	sceneGroup:insert( background )
 	sceneGroup:insert( ground )
 	sceneGroup:insert( spike )
@@ -115,15 +121,15 @@ function scene:create( event )
 	physics.start()
 	ball.rotation = 0
 	-- temp code
-	
+
 	local max, acceleration, leftM, rightM = 360, 120, 0, 0
     local lastEvent = {}
     local function movement ( event )
         local phase = event.phase
         local name = event.target.objType
-        if ( phase == lastEvent.phase ) and ( name == lastEvent.target.objType ) then 
-			return false 
-		end 
+        if ( phase == lastEvent.phase ) and ( name == lastEvent.target.objType ) then
+			return false
+		end
 		-- cancel same buttons pressed
         if (phase == "began") then
             if "left" == name then
@@ -133,16 +139,16 @@ function scene:create( event )
                 rightM = acceleration
             end
         elseif phase == "ended" then
-            if ("left" == name )then 
-				leftM = 0 
+            if ("left" == name )then
+				leftM = 0
 			end
-            if "right" == name then 
-				rightM = 0 
+            if "right" == name then
+				rightM = 0
 			end
         end
         lastEvent = event
     end
-	
+
 	local function enterFrame()
 		-- game loop
 		local vx, vy = ball:getLinearVelocity()
@@ -151,18 +157,18 @@ function scene:create( event )
 		print("isdx---")
 		print(vx)
 		print("is-vx---")
-		if midAir then 
-			dx = dx / 2 
+		if midAir then
+			dx = dx / 2
 		end
 		if ( dx < 0 and vx > -max ) or ( dx > 0 and vx < max ) then
 			ball:applyForce( dx or 0, 0, ball.x, ball.y )
 		end
-		
-		
+
+
 	end
 	Runtime:addEventListener( "enterFrame", enterFrame )
 	--temp code
-	
+
 	local function restoreBall()
 		physics.removeBody(ball)
 		physics.addBody( ball, "dynamic", { radius=45, density=1.0, bounce=0.5}, {box={ halfWidth=30, halfHeight=10, x=0, y=60}, isSensor=true } )
@@ -193,17 +199,17 @@ function scene:create( event )
 			end
 		end
 	end
-	
-	
+
+
 	-- local spikesTable = {}
 	-- table.insert(spikesTable, spike)
-	
-	
+
+
 	spike.collision = death
 	spike:addEventListener( "collision" )
-	
+
 	local cirBreaker = 0
-	
+
 	local function jumpAction( event )
 		if ( event.phase == "began" and ball.sensorOverlaps > 0 ) then
 			midAir = true
@@ -213,15 +219,15 @@ function scene:create( event )
 			ball:applyLinearImpulse( nil, -50, ball.x, ball.y )
 		end
 	end
-	
-	
-	
+
+
+
 
 	local function sensorCollide( self, event )
 
 		-- Confirm that the colliding elements are the foot sensor and a ground object
 		if ( event.selfElement == 2 and event.other.objType == "ground" ) then
-			
+
 			-- Foot sensor has entered (overlapped) a ground object
 			if ( event.phase == "began" ) then
 				midAir = false
@@ -244,7 +250,7 @@ function scene:create( event )
 	left:addEventListener( "touch", movement )
 	right:addEventListener( "touch", movement )
 	local function gameLoop ()
-	
+
 		if (ball.x > screenW or ball.x < 0) then
 			ball:setLinearVelocity(0, 0)
 			ball.angularVelocity = 0
@@ -259,12 +265,12 @@ end
 function scene:show( event )
 	local sceneGroup = self.view
 	local phase = event.phase
-	
+
 	if phase == "will" then
 		-- Called when the scene is still off screen and is about to move on screen
 	elseif phase == "did" then
 		-- Called when the scene is now on screen
-		-- 
+		--
 		-- INSERT code here to make the scene come alive
 		-- e.g. start timers, begin animation, play audio, etc.
 		physics.start()
@@ -273,9 +279,9 @@ end
 
 function scene:hide( event )
 	local sceneGroup = self.view
-	
+
 	local phase = event.phase
-	
+
 	if event.phase == "will" then
 		-- Called when the scene is on screen and is about to move off screen
 		--
@@ -284,18 +290,18 @@ function scene:hide( event )
 		physics.stop()
 	elseif phase == "did" then
 		-- Called when the scene is now off screen
-	end	
-	
+	end
+
 end
 
 function scene:destroy( event )
 
 	-- Called prior to the removal of scene's "view" (sceneGroup)
-	-- 
+	--
 	-- INSERT code here to cleanup the scene
 	-- e.g. remove display objects, remove touch listeners, save state, etc.
 	local sceneGroup = self.view
-	
+
 	package.loaded[physics] = nil
 	physics = nil
 end
