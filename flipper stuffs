@@ -1,7 +1,7 @@
 -- Create flipper object
     local flipper = display.newImageRect("flipper.png", 223, 60)
     flipper.x = display.contentCenterX - 50
-    flipper.y = display.contentCenterY - 250
+    flipper.y = display.contentHeight - 250
 	flipper.rotation = 45
     flipper.objType = "flipper"
     physics.addBody( flipper, "static", { bounce=5.0, friction=0.3 } )
