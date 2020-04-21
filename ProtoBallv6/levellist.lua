@@ -129,9 +129,7 @@ function scene:destroy( event )
 		playBtn:removeSelf()	-- widgets must be manually removed
 		playBtn = nil
 	end
-	if muted then
-		audio.dispose( backgroundMusic )
-	end
+	
 end
 
 ---------------------------------------------------------------------------------
