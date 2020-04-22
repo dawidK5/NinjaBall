@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="2020.03.18" orientation="orthogonal" renderorder="right-down" width="23" height="36" tilewidth="33" tileheight="33" infinite="0" nextlayerid="5" nextobjectid="73">
+ <editorsettings>
+  <export target="Level_1.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" source="Objects.tsx"/>
+ <objectgroup id="2" name="background">
+  <object id="49" gid="2147483659" x="1.22222" y="1190.78" width="759.929" height="1189.89"/>
+ </objectgroup>
+ <objectgroup id="4" name="behind"/>
+ <objectgroup id="3" name="game layer ">
+  <object id="1" gid="3" x="-0.363636" y="1189.73" width="755.273" height="33"/>
+  <object id="3" gid="3" x="627.717" y="1090.33" width="128" height="33"/>
+  <object id="4" gid="3" x="629.131" y="826.091" width="128" height="33"/>
+  <object id="5" gid="3" x="331.939" y="887.364" width="128" height="33"/>
+  <object id="6" gid="3" x="95.697" y="1026.82" width="128" height="33"/>
+  <object id="7" gid="3" x="494.576" y="1157.36" width="464.364" height="33" rotation="-90"/>
+  <object id="8" gid="3" x="462.273" y="691.727" width="128" height="33"/>
+  <object id="12" gid="3" x="155.333" y="428.091" width="370.424" height="33"/>
+  <object id="23" name="flipper" gid="2" x="-18.6987" y="897.521" width="120" height="37" rotation="392.249"/>
+  <object id="24" gid="3" x="80.5253" y="665.667" width="76" height="33"/>
+  <object id="25" gid="3" x="188.576" y="667.222" width="238.828" height="33" rotation="-90"/>
+  <object id="26" gid="3" x="3.15152" y="528.697" width="76" height="33"/>
+  <object id="27" name="bumper" gid="1" x="574.97" y="322.545" width="120" height="120"/>
+  <object id="28" gid="3" x="2.66667" y="198.818" width="452.242" height="33"/>
+  <object id="29" name="spikes" gid="5" x="206.97" y="192.414" width="140" height="61"/>
+  <object id="30" name="spring" gid="4" x="36.3333" y="166.808" width="34" height="51"/>
+  <object id="31" gid="3" x="498.02" y="954.98" width="128" height="33"/>
+  <object id="34" name="bumper" gid="1" x="228.303" y="718.101" width="120" height="120">
+   <properties>
+    <property name="bounce" type="object" value="0"/>
+   </properties>
+  </object>
+  <object id="35" name="spikes" gid="5" x="22.5253" y="1158.64" width="140" height="61"/>
+  <object id="36" name="spikes" gid="5" x="151.414" y="1159.53" width="140" height="61"/>
+  <object id="37" name="spikes" gid="5" x="282.97" y="1158.64" width="140" height="61"/>
+  <object id="38" name="spikes" gid="1073741829" x="315.859" y="490.192" width="140" height="61"/>
+  <object id="39" name="spikes" gid="1073741829" x="186.97" y="490.192" width="140" height="61"/>
+ </objectgroup>
+</map>
