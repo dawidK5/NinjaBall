@@ -1,0 +1,209 @@
+[
+{
+ "gid":3,
+ "height":33,
+ "name":"shelf",
+ "rotation":0,
+ "width":755.273,
+ "x":-0.363636,
+ "y":1189.73
+}, 
+{
+ "gid":3,
+ "height":33,
+ "name":"shelf",
+ "rotation":0,
+ "width":128,
+ "x":627.717,
+ "y":1090.33
+}, 
+{
+ "gid":3,
+ "height":33,
+ "name":"shelf",
+ "rotation":0,
+ "width":128,
+ "x":629.131,
+ "y":826.091
+}, 
+{
+ "gid":3,
+ "height":33,
+ "name":"shelf",
+ "rotation":0,
+ "width":128,
+ "x":331.939,
+ "y":887.364
+}, 
+{
+ "gid":3,
+ "height":33,
+ "name":"shelf",
+ "rotation":0,
+ "width":128,
+ "x":95.697,
+ "y":1026.82
+}, 
+{
+ "gid":3,
+ "height":33,
+ "name":"shelf",
+ "rotation":-90,
+ "width":464.364,
+ "x":494.576,
+ "y":1157.36
+}, 
+{
+ "gid":3,
+ "height":33,
+ "name":"shelf",
+ "rotation":0,
+ "width":128,
+ "x":462.273,
+ "y":691.727
+}, 
+{
+ "gid":3,
+ "height":33,
+ "name":"shelf",
+ "rotation":0,
+ "width":370.424,
+ "x":155.333,
+ "y":428.091
+}, 
+{
+ "gid":2,
+ "height":37,
+ "name":"flipper",
+ "rotation":392.249,
+ "width":120,
+ "x":-18.6987,
+ "y":897.521
+}, 
+{
+ "gid":3,
+ "height":33,
+ "name":"shelf",
+ "rotation":0,
+ "width":76,
+ "x":80.5253,
+ "y":665.667
+}, 
+{
+ "gid":3,
+ "height":33,
+ "name":"shelf",
+ "rotation":-90,
+ "width":238.828,
+ "x":188.576,
+ "y":667.222
+}, 
+{
+ "gid":3,
+ "height":33,
+ "name":"shelf",
+ "rotation":0,
+ "width":76,
+ "x":3.15152,
+ "y":528.697
+}, 
+{
+ "gid":1,
+ "height":120,
+ "name":"bumper",
+ "rotation":0,
+ "width":120,
+ "x":574.97,
+ "y":382.545
+}, 
+{
+ "gid":3,
+ "height":33,
+ "name":"shelf",
+ "rotation":0,
+ "width":452.242,
+ "x":2.66667,
+ "y":198.818
+}, 
+{
+ "gid":5,
+ "height":61,
+ "name":"spikes",
+ "rotation":0,
+ "width":140,
+ "x":202.824608897935,
+ "y":186.886811863914
+}, 
+{
+ "gid":4,
+ "height":51,
+ "name":"spring",
+ "rotation":0,
+ "width":34,
+ "x":36.3333,
+ "y":166.808
+}, 
+{
+ "gid":3,
+ "height":33,
+ "name":"shelf",
+ "rotation":0,
+ "width":128,
+ "x":498.02,
+ "y":954.98
+}, 
+{
+ "gid":1,
+ "height":120,
+ "name":"bumper",
+ "rotation":0,
+ "width":120,
+ "x":228.303,
+ "y":718.101
+}, 
+{
+ "gid":5,
+ "height":61,
+ "name":"spikes",
+ "rotation":0,
+ "width":140,
+ "x":22.5253,
+ "y":1158.64
+}, 
+{
+ "gid":5,
+ "height":61,
+ "name":"spikes",
+ "rotation":0,
+ "width":140,
+ "x":169.37736144228,
+ "y":1158.14820296598
+}, 
+{
+ "gid":5,
+ "height":61,
+ "name":"spikes",
+ "rotation":0,
+ "width":140,
+ "x":314.751331782495,
+ "y":1157.25820296598
+}, 
+{
+ "gid":5,
+ "height":61,
+ "name":"spikes",
+ "rotation":180,
+ "width":140,
+ "x":318.622594068043,
+ "y":490.192
+}, 
+{
+ "gid":5,
+ "height":61,
+ "name":"spikes",
+ "rotation":180,
+ "width":140,
+ "x":186.97,
+ "y":490.192
+}
+]
