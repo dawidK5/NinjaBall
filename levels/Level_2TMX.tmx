@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="2020.03.18" orientation="orthogonal" renderorder="right-down" width="23" height="36" tilewidth="33" tileheight="33" infinite="0" nextlayerid="4" nextobjectid="49">
+ <editorsettings>
+  <export target="Level_Two.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../ProtoBallv6/Objects.tsx"/>
+ <objectgroup id="2" name="background">
+  <object id="1" gid="11" x="2.86629" y="1185.5" width="753.61" height="1184.96"/>
+ </objectgroup>
+ <objectgroup id="3" name="game layer">
+  <object id="3" gid="3" x="-0.628734" y="1189.37" width="757.488" height="33"/>
+  <object id="4" gid="3" x="-2.74111" y="940.112" width="263.192" height="33"/>
+  <object id="5" gid="3" x="193.71" y="1066.85" width="248.405" height="33"/>
+  <object id="10" name="bumper" gid="1" x="40.8317" y="527.397" width="100" height="99"/>
+  <object id="20" name="spikes" gid="5" x="-2.40358" y="907.635" width="140" height="61"/>
+  <object id="22" name="spikes" gid="5" x="415.846" y="1644.85" width="140" height="61"/>
+  <object id="23" name="spikes" gid="5" x="610.185" y="1159.01" width="140" height="61"/>
+  <object id="24" name="spikes" gid="5" x="470.768" y="1161.12" width="140" height="61"/>
+  <object id="26" name="bumper" gid="1" x="516.116" y="345.733" width="100" height="99"/>
+  <object id="27" name="spikes" gid="5" x="620.747" y="694.286" width="140" height="61"/>
+  <object id="29" gid="3" x="309.89" y="823.927" width="288.541" height="33"/>
+  <object id="30" gid="3" x="630.972" y="610.578" width="134.337" height="33"/>
+  <object id="31" gid="3" x="548.589" y="724.646" width="197.708" height="33"/>
+  <object id="32" gid="3" x="242.294" y="346.531" width="216.72" height="33"/>
+  <object id="33" gid="3" x="195.822" y="494.397" width="402.609" height="33"/>
+  <object id="34" name="spikes" gid="1073741829" x="407.397" y="554.869" width="140" height="61"/>
+  <object id="35" name="spikes" gid="1073741829" x="272.205" y="554.869" width="140" height="61"/>
+  <object id="36" gid="3" x="3.59602" y="162.754" width="406.834" height="33"/>
+  <object id="37" name="spikes" gid="5" x="453.869" y="789.342" width="140" height="61"/>
+  <object id="38" name="spikes" gid="1073741829" x="10.2706" y="223.226" width="140" height="61"/>
+  <object id="40" gid="3" x="552.814" y="33.899" width="204.046" height="33"/>
+  <object id="41" gid="3" x="759.826" y="230.35" width="193.484" height="33" rotation="-90"/>
+  <object id="42" name="spikes" gid="1073741829" x="565.825" y="94.3716" width="140" height="61"/>
+  <object id="43" name="spikes" gid="1073741829" x="671.444" y="77.4726" width="140" height="61" rotation="90"/>
+  <object id="44" gid="4" x="31.5846" y="131.619" width="34" height="51"/>
+  <object id="48" name="spikes" gid="5" x="335.576" y="1161.12" width="140" height="61"/>
+ </objectgroup>
+</map>

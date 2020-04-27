@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="2020.03.18" orientation="orthogonal" renderorder="right-down" width="23" height="36" tilewidth="33" tileheight="33" infinite="0" nextlayerid="4" nextobjectid="40">
+ <editorsettings>
+  <export target="level_Three.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../ProtoBallv6/Objects.tsx"/>
+ <objectgroup id="2" name="background">
+  <object id="1" gid="11" x="2.86629" y="1187.61" width="753.61" height="1184.96"/>
+ </objectgroup>
+ <objectgroup id="3" name="gamelayer">
+  <object id="2" gid="3" x="-0.628734" y="1187.26" width="753.263" height="33"/>
+  <object id="3" gid="3" x="7.82077" y="1052.07" width="128" height="33"/>
+  <object id="4" gid="3" x="172.586" y="937.996" width="332.9" height="33"/>
+  <object id="5" gid="3" x="204.272" y="739.433" width="235.731" height="33"/>
+  <object id="6" name="bumper" gid="1" x="545.69" y="907.624" width="100" height="99"/>
+  <object id="8" gid="1073741827" x="299.329" y="528.195" width="444.856" height="33"/>
+  <object id="9" gid="3" x="603.511" y="418.351" width="153.349" height="33"/>
+  <object id="10" gid="3" x="18.3823" y="327.52" width="518.79" height="33"/>
+  <object id="13" gid="3" x="238.069" y="232.462" width="144.899" height="33"/>
+  <object id="14" gid="3" x="-4.85351" y="162.754" width="185.035" height="33"/>
+  <object id="16" name="spikes" gid="5" x="601.735" y="1159.01" width="140" height="61"/>
+  <object id="23" name="bumper" gid="1" x="72.5178" y="715.399" width="100" height="99"/>
+  <object id="25" name="spikes" gid="5" x="472.881" y="1156.9" width="140" height="61"/>
+  <object id="26" name="spikes" gid="5" x="341.913" y="1156.9" width="140" height="61"/>
+  <object id="27" name="spikes" gid="5" x="257.418" y="924.535" width="140" height="61"/>
+  <object id="28" name="spikes" gid="1073741829" x="599.623" y="586.555" width="140" height="61"/>
+  <object id="29" name="spikes" gid="1073741829" x="466.543" y="586.555" width="140" height="61"/>
+  <object id="31" name="spring" gid="4" x="31.5846" y="131.619" width="34" height="51"/>
+  <object id="33" name="spikes" gid="5" x="599.623" y="495.723" width="140" height="61"/>
+  <object id="34" name="spikes" gid="5" x="276.429" y="295.047" width="140" height="61"/>
+  <object id="37" name="spikes" gid="1073741829" x="14.4946" y="383.767" width="140" height="61"/>
+  <object id="38" name="spikes" gid="5" x="8.15751" y="295.047" width="140" height="61"/>
+  <object id="39" name="spikes" gid="5" x="141.237" y="295.047" width="140" height="61"/>
+ </objectgroup>
+</map>
