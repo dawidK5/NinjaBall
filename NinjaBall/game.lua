@@ -17,6 +17,7 @@ local physics = require( "physics" )
 -- forward declarations and other locals
 local screenW, screenH, halfW = display.actualContentWidth, display.actualContentHeight, display.contentCenterX
 local originX, originY = display.screenOriginX, display.screenOriginY
+local isDead = false
 --
 -- this coordinates table has the folling info for each spike
 -- {x-value of left corner, y-value of left corner, rotation(*180degrees), number of spikes on the same height to the right}
@@ -35,7 +36,10 @@ table.sort(objects, compare) --sort the table for better register and cache use
 local images = {"bumper", "flipper", "shelf", "spring", "spikes"} --order matches 'gid'
 local spikesShape = { -70,30, -50,-30, 50,-30, 70,30 }
 local options = { {"static", {radius=60, bounce=2}}, {"kinematic", { bounce=2.5, friction=0.3 }},
-	{"static", {bounce=0,friction=0.3}}, {"static", { bounce=0.0, friction=0.3 }}, {"static", { bounce=0, friction=0, isSensor=true } } }
+	{"static", {bounce=0,friction=0.3}}, {"static", { bounce=0.0, friction=0.3 }},
+	{"static", { bounce=0, friction=0, isSensor=true } } }
+
+
 
 
 function scene:create( event )
@@ -60,6 +64,18 @@ function scene:create( event )
 	background.anchorX = 0
 	background.anchorY = 0
 	sceneGroup:insert( background )
+
+	local ball = display.newImageRect( "img/ninja_ball.png", 60, 60 )
+	ball.x = display.contentCenterX
+	ball.y = 250
+	local initPosX = display.contentCenterX
+	local initPosY = display.contentCenterY
+	ball.rotation = 0
+	ball.objType = "ball"
+
+	physics.addBody( ball, "dynamic", { radius=30, density=2, bounce=0.3 }, {box={ halfWidth=20, halfHeight=10, x=0, y=40}, isSensor=true } )
+	ball:setLinearVelocity(0, 0)
+
 
 	local temp={}
 	for i=#objects, 1, -1 do
@@ -95,15 +111,9 @@ function scene:create( event )
 
 
 	print("usable height")
-	print(screenH-133)
+	print(screenH*0.9)
 
-	local ball = display.newImageRect( "img/ninja_ball.png", 60, 60 )
-	ball.x = display.contentCenterX
-	ball.y = 250
-	local initPosX = display.contentCenterX
-	local initPosY = display.contentCenterY
-	ball.rotation = 0
-	ball.objType = "ball"
+
 
 	--places buttons
 	local left = display.newImageRect( "img/left.png", screenW/3, screenH/10 )
@@ -138,11 +148,8 @@ function scene:create( event )
 	sceneGroup:insert( left )
 	sceneGroup:insert( right )
 	sceneGroup:insert( jump )
-	--sceneGroup:insert( lvl )
 
 
-	physics.addBody( ball, "dynamic", { radius=30, density=2, bounce=0.3 }, {box={ halfWidth=20, halfHeight=10, x=0, y=40}, isSensor=true } )
-	ball:setLinearVelocity(0, 0)
 	--ball.box.objType = "hitbox"
 	--ball.isFixedRotation = true
 	ball.sensorOverlaps = 0
@@ -154,8 +161,8 @@ function scene:create( event )
         local phase = event.phase
         local name = event.target.objType
         if ( phase == lastEvent.phase ) and ( name == lastEvent.target.objType ) then
-			return false
-		end
+					return false
+				end
 		-- cancel same buttons pressed
         if (phase == "began") then
             if "left" == name then
@@ -164,34 +171,31 @@ function scene:create( event )
             if "right" == name then
                 rightM = acceleration
             end
-        elseif phase == "ended" then
+        elseif phase == "ended" or phase=="moved" then
             if ("left" == name )then
-				leftM = 0
-			end
+							leftM = 0
+						end
             if "right" == name then
-				rightM = 0
-			end
+							rightM = 0
+						end
         end
         lastEvent = event
     end
-
-	local function enterFrame()
-		-- game loop
-		local vx, vy = ball:getLinearVelocity()
-		local dx = math.round(leftM + rightM)
-		-- print(dx)
-		-- print("isdx---")
-		-- print(vx)
-		-- print("is-vx---")
-		if midAir then
-			dx = dx / 2
+		local function enterFrame()
+			-- game loop
+			local vx, vy = ball:getLinearVelocity()
+			local dx = math.round(leftM + rightM)
+			if midAir then
+				dx = dx / 2
+			end
+			if ( dx > -1 and dx < 1) then
+        ball:applyForce( -(vx/5) or 0, 0, ball.x, ball.y )
+      end
+			if ( dx < 0 and vx > -max ) or ( dx > 0 and vx < max ) then--and (not isDead) then
+				ball:applyForce( dx or 0, 0, ball.x, ball.y )
+			end
 		end
-		if ( dx < 0 and vx > -max ) or ( dx > 0 and vx < max ) then
-			ball:applyForce( dx or 0, 0, ball.x, ball.y )
-		end
 
-
-	end
 
 
 	local function restoreBall()
@@ -213,6 +217,8 @@ function scene:create( event )
 	local function death(self, event)
 		if event.other.objType == "ball" and event.otherElement == 1 then
 			if event.phase == "began" then
+				print("dying")
+				isDead=true
 				vx=0
 				vy=0
 				ball.angularVelocity=0
@@ -224,14 +230,14 @@ function scene:create( event )
 		end
 	end
 
-local ind = 1
-while ( ind <= #objects) do --c is object count
-	if (objects[ind].objType=="spikes") then
-	objects[ind].collision = death
-	objects[ind]:addEventListener( "collision" )
+	local ind = 1
+	while ( ind <= #objects) do --c is object count
+		if (objects[ind].objType=="spikes") then
+			objects[ind].collision = death
+			objects[ind]:addEventListener( "collision" )
+		end
+		ind=ind+1
 	end
-	ind=ind+1
-end
 	local cirBreaker = 0
 
 	local function jumpAction( event )
@@ -263,7 +269,6 @@ end
 		elseif  (event.selfElement == 2 and event.other.objType == "flipper") then
             if ( event.phase == "began" ) then
 								self.sensorOverlaps = self.sensorOverlaps + 1
-
                 transition.to( event.other, { rotation=-45, time=100, transition=easing.inOutCubic } )
             elseif ( event.phase == "ended" ) then
                 transition.to( event.other, { rotation=45, time=100, transition=easing.inOutCubic } )
@@ -272,21 +277,24 @@ end
 		elseif  (event.selfElement == 2 and event.other.objType == "spring") then
 			if ( event.phase == "began" ) then
 				ball:setLinearVelocity( vx, vy )
+				physics.removeBody(boundaries[1])
 				ball:applyLinearImpulse( nil, -200, ball.x, ball.y )
 				display.remove( boundaries[1] )
 				boundaries[1] = nil
+			elseif ( event.phase == "ended" ) then
 			end
     end
 	end
-	--------------
-
 	-- Associate collision handler function with character
 	ball.collision = sensorCollide
+
+
 	ball:addEventListener( "collision" )
 	jump:addEventListener( "touch", jumpAction )
 	left:addEventListener( "touch", movement )
 	right:addEventListener( "touch", movement )
 	Runtime:addEventListener( "enterFrame", enterFrame )
+
 end
 
 
@@ -297,6 +305,7 @@ function scene:show( event )
 	if phase == "will" then
 		-- Called when the scene is still off screen and is about to move on screen
 	elseif phase == "did" then
+
 		-- Called when the scene is now on screen
 		--
 		-- INSERT code here to make the scene come alive

@@ -13,10 +13,13 @@ local widget = require "widget"
 --------------------------------------------
 
 -- forward declarations and other locals
-local playBtn
+local controls = display.newGroup();
 local muteBtn
 local credits
 local backgroundMusic
+
+local screenW, screenH, halfW = display.actualContentWidth, display.actualContentHeight, display.contentCenterX
+local originX, originY = display.screenOriginX, display.screenOriginY
 
 backgroundMusic = audio.loadStream( "sound/musictheme.wav" )
 local function gotoCredits()
@@ -45,57 +48,60 @@ function scene:create( event )
 	local sceneGroup = self.view
 	audio.setVolume(0)
 	muted = false
+	-- menu buttons, same buttons will be used for controls
+	local left = display.newRect( originX, originY+screenH*0.9, screenW/3, screenH/10 )
+	left.anchorX = 0
+	left.anchorY = 0
+	left.text = display.newText( "Play", screenW/6, screenH*0.95, native.systemFont, screenW/16)
+
+	left:setFillColor( 0.93, 0.07, 0.11 )
+	left.objType = "left"
+
+	local right = display.newRect( originX + screenW/3, originY + screenH*0.9, screenW/3, screenH/10 )
+	right.anchorX = 0
+	right.anchorY = 0
+	right.text = display.newText( "Mute", screenW/2, screenH*0.95, native.systemFont, screenW/16)
+	right:setFillColor( 0.77, 0.06, 0.09 )
+	right.objType = "right"
+
+	local jump = display.newRect( originX + screenW*2/3, originY + screenH*0.9, screenW/3, screenH/10 )
+	jump.anchorX = 0
+	jump.anchorY = 0
+	right.text = display.newText( "Credits", screenW*5/6, screenH*0.95, native.systemFont, screenW/16)
+	jump:setFillColor( 0.67, 0, 0.1 )
+	jump.objType = "jump"
+
+
 	-- Called when the scene's view does not exist.
 	--
 	-- INSERT code here to initialize the scene
 	-- e.g. add display objects to 'sceneGroup', add touch listeners, etc.
-	credits = display.newText( "Credits", 100, 200, native.systemFont, 56 )
+
 
 	-- display a background image
-	local background = display.newImageRect( "img/background.jpg", display.actualContentWidth, display.actualContentHeight )
+	local background = display.newImageRect( "img/menubckg.png", screenW, screenH*0.9 )
 	background.anchorX = 0
 	background.anchorY = 0
-	background.x = 0 + display.screenOriginX
-	background.y = 0 + display.screenOriginY
-
-	-- create/position logo/title image on upper-half of the screen
-	local titleLogo = display.newImageRect( "img/ninja_ball.png", 64, 64 )
-	titleLogo.x = display.contentCenterX
-	titleLogo.y = 100
-	-- 'onRelease' event listener for playBtn
-	local function onPlayBtnRelease()
-		-- go to levellist.lua
-		composer.gotoScene( "levellist", "fade", 500 )
-
-		return true	-- indicates successful touch
-
-	end
-
-
+	background.x = originX
+	background.y = originY
 
 	muteBtn = display.newImageRect( "img/mute.png", 160, 160 )
 	muteBtn.x = display.actualContentWidth-80
 	muteBtn.y = 80
 	muteBtn:setFillColor(2)
 	-- create a widget button (which will loads level1.lua on release)
-	playBtn = widget.newButton{
-		label="Play Now",
-		labelColor = { default={255}, over={128} },
-		-- default="button.png",
-		-- over="button-over.png",
-		width=154, height=40,
-		onRelease = onPlayBtnRelease	-- event listener function
-	}
-	playBtn.x = display.contentCenterX
-	playBtn.y = display.contentHeight - 125
 
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )
-	sceneGroup:insert( titleLogo )
-	sceneGroup:insert( playBtn )
-	sceneGroup:insert( credits )
-	--sceneGroup:insert( muteBtn )
-	credits:addEventListener("tap", gotoCredits )
+	controls:insert(left)
+	controls:insert(right)
+	controls:insert(jump)
+	sceneGroup:insert(controls)
+	local function switchScene (self)
+		composer.gotoScene( "levellist", "crossFade", 500 )
+	end
+	--left.tap = switchScene
+	left:addEventListener( "tap", switchScene)
 	muteBtn:addEventListener(	"tap", onMuteBtnRelease )
 end
 
@@ -137,11 +143,8 @@ function scene:destroy( event )
 	--
 	-- INSERT code here to cleanup the scene
 	-- e.g. remove display objects, remove touch listeners, save state, etc.
+	left:removeEventListener("tap", switchScene);
 
-	if playBtn then
-		playBtn:removeSelf()	-- widgets must be manually removed
-		playBtn = nil
-	end
 
 
 end
