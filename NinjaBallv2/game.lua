@@ -142,9 +142,14 @@ function scene:create( event )
 	jump.anchorY = 0
 	jump.objType = "jump"
 	local midAir = true
+	
+	local maxSpeed = 250
+	local levelTransition = false
 
 	audio.setVolume(0.9)
 	local bumperSound = audio.loadSound("sound/bumper.wav")
+	local flipperSound = audio.loadSound("sound/flipper.wav")
+	local LevelTransitionSound = audio.loadSound("sound/leveltrans.wav")
 
 	sceneGroup:insert( ball )
 
@@ -189,8 +194,12 @@ function scene:create( event )
     end
 		local function enterFrame()
 			-- game loop
+			
 			local vx, vy = ball:getLinearVelocity()
 			local dx = math.round(leftM + rightM)
+			local direction = 1
+			if(vx>0)then direction = 1 else direction = -1 end
+			
 			if midAir then
 				dx = dx / 1
 			end
@@ -200,6 +209,7 @@ function scene:create( event )
 			if ( dx > -0.5 and dx < 0.5) then
 				--print("slow")
 				ball:applyForce( -(vx/5) or 0, 0, ball.x, ball.y )
+				if (vx<30 and vx>-30) then ball:setLinearVelocity(0, vy)end
 			end
 		end
 
@@ -220,7 +230,24 @@ function scene:create( event )
 		physics.start()
 		transition.to(ball, {time=1000, alpha=1})
 	end
-
+local function switchScene (event)
+	if event.target.objType == "left" then
+			composer.gotoScene( "levelTwo", "fade", 500 )
+	elseif event.target.objType == "right" then
+		muted = not muted
+		if muted then
+			audio.stop()
+			audio.setVolume(0)
+			rightText.text="Unmute"
+		else
+			audio.setVolume(0.5)
+			audio.setVolume( 0.2, {channel=1} )
+			audio.play( backgroundMusic, { channel=1, loops=-1, fadein=1500} )
+			rightText.text="Mute"
+		end
+		print(muted)
+	end
+end
 	local function death(self, event)
 		if event.other.objType == "ball" and event.otherElement == 1 then
 			if event.phase == "began" then
@@ -253,7 +280,7 @@ function scene:create( event )
 		if ( event.phase == "began" and ball.sensorOverlaps > 0  and vy>-50 ) then
 			-- local cirBreaker = 0
 			ball:setLinearVelocity( vx, vy )
-			ball:applyLinearImpulse( nil, -50, ball.x, ball.y )
+			ball:applyLinearImpulse( nil, -60, ball.x, ball.y )
 		end
 	end
 
@@ -277,7 +304,8 @@ function scene:create( event )
 
             if ( event.phase == "began" ) then
 								self.sensorOverlaps = self.sensorOverlaps + 1
-                transition.to( event.other, { rotation=-45, time=300, transition=easing.inOutCubic } )
+                transition.to( event.other, { rotation=-45, time=300, transition=easing.inOutCubic })
+				audio.play(flipperSound)
             elseif ( event.phase == "ended" ) then
                 transition.to( event.other, { rotation=45, time=300, transition=easing.inOutCubic } )
 								self.sensorOverlaps = self.sensorOverlaps - 1
@@ -285,11 +313,13 @@ function scene:create( event )
 
 		elseif  (event.selfElement == 2 and event.other.objType == "spring") then
 			if ( event.phase == "began" ) then
+			audio.play(LevelTransitionSound)
 				ball:setLinearVelocity( vx, vy )
 				physics.removeBody(boundaries[1])
 				ball:applyLinearImpulse( nil, -200, ball.x, ball.y )
 				display.remove( boundaries[1] )
 				boundaries[1] = nil
+				transition = true
 			elseif ( event.phase == "ended" ) then
 			end
     end
