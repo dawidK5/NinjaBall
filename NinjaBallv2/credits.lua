@@ -26,23 +26,17 @@ Tomás Crowley
 Dawid Kocik
 Ronan McMorrow
 
-Reference:
-(Where we sourced our images and materials from)
-mute button= icon8.com
-pngbuffet.com
-musictheme = playonloop.com
-bumper = playonloop.com
-3d black cirlce png = clipart-library.com
-crate= apkpure.com
-spring = chegg.com
-Level Background = simsworkshop.net
+Theme from
+playonloop.com
 
-Assets
-pngbuffet.com
-icon8.com
-freesound.org
-opengameart.org
+3d black circle from
+clipart-library.coms
 
+Spring from
+chegg.com
+
+Background
+simsworkshop.net
 
 ]===================]
 local rightText
@@ -92,7 +86,7 @@ function scene:create( event )
 
 )
 
-  local background = display.newImageRect("img/scroll.png", display.actualContentWidth, textBox.height+textBox.height*0.2 )
+  local background = display.newImageRect("img/scroll.png", display.actualContentWidth, textBox.height+textBox.height*0.55 )
   background.anchorX = 0
   background.anchorY = 0
   local left = display.newRect( originX, originY+screenH*0.9, screenW/3, screenH/10 )
