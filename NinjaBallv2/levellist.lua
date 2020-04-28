@@ -21,9 +21,10 @@ local screenH = display.actualContentHeight
 local originX, originY = display.screenOriginX, display.screenOriginY
 local rightText
 -- 'onRelease' event listener for playBtn
-local function onPlayBtnRelease()
+local function onPlayBtnRelease( event )
+	composer.setVariable( "levelToLoad",  event.target:getLabel() )
 	-- go to level1.lua scene
-	composer.gotoScene( "game", "fade", 700 )
+	composer.gotoScene( "game", "fade", 700 ) 
 	return true	-- indicates successful touch
 end
 local function switchScene (event)

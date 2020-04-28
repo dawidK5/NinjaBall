@@ -5,12 +5,12 @@
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
-local buttons = require( "controls" )
+
 local scene = composer.newScene()
 local json = require( "json" )
 system.activate("multitouch")	-- our game supports multitouch
 local physics = require( "physics" )
---physics.setDrawMode( "hybrid" )
+physics.setDrawMode( "hybrid" )
 --------------------------------------------
 
 -- forward declarations and other locals
@@ -25,7 +25,7 @@ local isDead = false
 --local spikesCoord = { {203, 187, 0, 0}, {187, 490, 1, 1}, {23, 1159, 0, 2} }
 --local spikes = {} -- actual spike objects stored here
 local objects = {}
-local levelMap = "Level1.json"--..composer.getVariable(activeLevel)..".json"
+local levelMap = "levels/Level"..composer.getVariable( "levelToLoad" )..".json"
 local function compare(a, b)
 	return a.gid < b.gid
 end
@@ -36,10 +36,10 @@ table.sort(objects, compare) --sort the table for better register and cache use
 
 local images = {"bumper", "flipper", "shelf", "spring", "spikes"} --order matches 'gid'
 local spikesShape = { -70,30, -50,-30, 50,-30, 70,30 }
-local options = { {"static", {radius=60, bounce=0.3}}, {"kinematic", { bounce=2, friction=0.3 }},
+local myoptions = { {"static", {radius=60, bounce=2}}, {"kinematic", { bounce=2, friction=0.3 }},
 	{"static", {bounce=0,friction=0.3}}, {"static", { bounce=0.0, friction=0.3 }},
 	{"static", { bounce=0, friction=0, isSensor=true } } }
-
+myoptions[1][2].radius = (objects[1].height)/2
 --local gameControls = composer.getVariable( controlsGroup )
 
 
@@ -96,7 +96,7 @@ function scene:create( event )
 			objects[i].y = temp[5] - ((temp[2] / 2) + (temp[3] / 2)) + (temp[3] / 2)
 		end
 		objects[i].rotation = temp[6]
-		physics.addBody(objects[i], options[ temp[1] ][1], options[ temp[1] ][2])
+		physics.addBody(objects[i], myoptions[ temp[1] ][1], myoptions[ temp[1] ][2])
 
 		sceneGroup:insert(objects[i])
 	end
@@ -147,7 +147,7 @@ function scene:create( event )
 	local bumperSound = audio.loadSound("sound/bumper.wav")
 
 	sceneGroup:insert( ball )
-	--sceneGroup:insert( buttons.controls )
+
 	sceneGroup:insert( left )
 	sceneGroup:insert( right )
 	sceneGroup:insert( jump )
