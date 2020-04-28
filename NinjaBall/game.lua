@@ -140,7 +140,8 @@ function scene:create( event )
 	--jump:setFillColor( .6 )
 
 	local midAir = true
-
+	local maxSpeed = 10
+	
 	audio.setVolume(0.9)
 	local bumperSound = audio.loadSound("sound/bumper.wav")
 
@@ -184,12 +185,15 @@ function scene:create( event )
 		local function enterFrame()
 			-- game loop
 			local vx, vy = ball:getLinearVelocity()
+			--if(vx>maxSpeed)then vx = maxSpeed
+			--if(vx>maxSpeed)then vx = maxSpeed
 			local dx = math.round(leftM + rightM)
 			if midAir then
 				dx = dx / 2
 			end
 			if ( dx > -1 and dx < 1) then
         ball:applyForce( -(vx/5) or 0, 0, ball.x, ball.y )
+
       end
 			if ( dx < 0 and vx > -max ) or ( dx > 0 and vx < max ) then--and (not isDead) then
 				ball:applyForce( dx or 0, 0, ball.x, ball.y )
@@ -200,7 +204,7 @@ function scene:create( event )
 
 	local function restoreBall()
 		physics.removeBody(ball)
-		physics.addBody( ball, "dynamic", { radius=30, density=2, bounce=0.3}, {box={ halfWidth=20, halfHeight=10, x=0, y=40}, isSensor=true } )
+		physics.addBody( ball, "dynamic", { radius=30, density=2, bounce=0.3}, {box={ halfWidth=20, halfHeight=1, x=0, y=40}, isSensor=true } )
 		ball.x = initPosX
 		ball.y = initPosY
 		ball:setLinearVelocity(0, 0)
@@ -241,9 +245,11 @@ function scene:create( event )
 	local cirBreaker = 0
 
 	local function jumpAction( event )
-		if ( event.phase == "began" and ball.sensorOverlaps > 0 ) then
+	local vx, vy = ball:getLinearVelocity()
+		if ( event.phase == "began" and ball.sensorOverlaps > 0 and vy>-50) then
+		
 			midAir = true
-			local vx, vy = ball:getLinearVelocity()
+			--local vx, vy = ball:getLinearVelocity()
 			-- local cirBreaker = 0
 			ball:setLinearVelocity( vx, vy )
 			ball:applyLinearImpulse( nil, -50, ball.x, ball.y )
@@ -265,8 +271,14 @@ function scene:create( event )
 		elseif ( event.selfElement == 1 and event.other.objType == "bumper") then
 			if ( event.phase == "began" ) then
 				audio.play(bumperSound)
+				local vx, vy = ball:getLinearVelocity()
+				if(vx>maxSpeed)then vx = maxSpeed end
+				if(vy>maxSpeed)then vy = maxSpeed end
 			end
 		elseif  (event.selfElement == 2 and event.other.objType == "flipper") then
+		local vx, vy = ball:getLinearVelocity()
+				if(vx>maxSpeed)then vx = maxSpeed end
+				if(vy>maxSpeed)then vy = maxSpeed end
             if ( event.phase == "began" ) then
 								self.sensorOverlaps = self.sensorOverlaps + 1
                 transition.to( event.other, { rotation=-45, time=100, transition=easing.inOutCubic } )
