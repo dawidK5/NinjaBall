@@ -52,7 +52,13 @@ function scene:show( event )
 	local phase = event.phase
 
 	if ( phase == "will" ) then
-    --muteText:addEventListener("tap", changeMute)
+    muted = composer.getVariable( "muted")
+    if muted then
+      muteText.text = "Unmute"
+    else
+      muteText.text = "Mute"
+    end
+    muteText:addEventListener("tap", changeMute)
     backToGame:addEventListener("tap", closeAndRestore)
     exitToMain:addEventListener("tap", closeAndExit)
 
@@ -71,7 +77,7 @@ function scene:hide( event )
 
 	if ( phase == "will" ) then
 		-- Code here runs when the scene is on screen (but is about to go off screen)
-    --muteText:removeEventListener("tap", changeMute)
+    muteText:removeEventListener("tap", changeMute)
     backToGame:removeEventListener("tap", closeAndRestore)
     exitToMain:removeEventListener("tap", closeAndRestore)
 	elseif ( phase == "did" ) then

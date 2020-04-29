@@ -17,6 +17,7 @@ local widget = require( "widget" )
 local screenW = display.actualContentWidth
 local screenH = display.actualContentHeight
 local originX, originY = display.screenOriginX, display.screenOriginY
+local muted = composer.getVariable( "muted" )
 local creditsText = [===================[
 
 
@@ -73,6 +74,7 @@ local function switchScene (event)
 			composer.gotoScene( "menu", "fade", 500 )
 	elseif event.target.objType == "right" then
 		muted = not muted
+		composer.setVariable( "muted", muted )
 		if muted then
 			audio.stop()
 			audio.setVolume(0)
@@ -112,7 +114,8 @@ function scene:create( event )
     }
 
 )
-
+	local colourBCG = display.newRect(display.contentCenterX, display.contentCenterY, screenW, screenH)
+	colourBCG:setFillColor(1, 1, 1)
   local background = display.newImageRect("img/scroll.png", display.actualContentWidth, textBox.height+textBox.height*0.5 )
   background.anchorX = 0
   background.anchorY = 0
@@ -137,6 +140,7 @@ function scene:create( event )
 	end
   scrollView:insert( background )
   scrollView:insert( textBox )
+	sceneGroup:insert( colourBCG )
   sceneGroup:insert(scrollView)
 
 	sceneGroup:insert( left )

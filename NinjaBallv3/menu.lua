@@ -19,8 +19,8 @@ local widget = require "widget"
 
 local screenW, screenH, halfW = display.actualContentWidth, display.actualContentHeight, display.contentCenterX
 local originX, originY = display.screenOriginX, display.screenOriginY
-local rightText
-muted = false
+local rightText, left, right, jump
+local muted = composer.getVariable( "muted" )
 backgroundMusic = audio.loadStream( "sound/musictheme.wav" )
 
 function scene:create( event )
@@ -43,32 +43,33 @@ function scene:create( event )
 	background.x = originX
 	background.y = originY
 
-	local left = display.newRect( originX, originY+screenH*0.9, screenW/3, screenH/10 )
+	left = display.newRect( originX, originY+screenH*0.9, screenW/3, screenH/10 )
 	left.anchorX = 0
 	left.anchorY = 0
 	local leftText = display.newText( "Play", screenW/6, screenH*0.95, native.systemFont, screenW/16)
 	left:setFillColor( 0.93, 0.07, 0.11 )
 	left.objType = "left"
 
-	local right = display.newRect( originX + screenW/3, originY + screenH*0.9, screenW/3, screenH/10 )
+	right = display.newRect( originX + screenW/3, originY + screenH*0.9, screenW/3, screenH/10 )
 	right.anchorX = 0
 	right.anchorY = 0
 	rightText = display.newText( "Mute", screenW/2, screenH*0.95, native.systemFont, screenW/16)
 	right:setFillColor( 0.77, 0.06, 0.09 )
 	right.objType = "right"
 
-	local jump = display.newRect( originX + screenW*2/3, originY + screenH*0.9, screenW/3, screenH/10 )
+	jump = display.newRect( originX + screenW*2/3, originY + screenH*0.9, screenW/3, screenH/10 )
 	jump.anchorX = 0
 	jump.anchorY = 0
 	local jumpText = display.newText( "Credits", screenW*5/6, screenH*0.95, native.systemFont, screenW/16)
 	jump:setFillColor( 0.67, 0, 0.1 )
 	jump.objType = "jump"
 
-	local function switchScene (event)
+	function switchScene (event)
 	  if event.target.objType == "left" then
 	      composer.gotoScene( "levellist", "crossFade", 500 )
 	  elseif event.target.objType == "right" then
 	    muted = not muted
+			composer.setVariable( "muted", muted )
 	    if muted then
 				audio.stop()
 	      audio.setVolume(0)
@@ -105,12 +106,13 @@ function scene:show( event )
 	local phase = event.phase
 
 	if phase == "will" then
-
+		muted = composer.getVariable("muted")
 		if muted then
 			rightText.text="Unmute"
 
 		else
 			rightText.text="Mute"
+			audio.play( backgroundMusic, { channel=1, loops=-1, fadein=1500 } )
 		end
 
 	elseif phase == "did" then
@@ -119,7 +121,7 @@ function scene:show( event )
 		-- INSERT code here to make the scene come alive
 		-- e.g. start timers, begin animation, play audio, etc.
 
-		audio.play( backgroundMusic, { channel=1, loops=-1, fadein=1500 } )
+
 	end
 end
 

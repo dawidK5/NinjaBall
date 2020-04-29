@@ -15,10 +15,12 @@ local widget = require "widget"
 -- forward declarations and other locals
 local levelsTable = {}
 local playBtn
+local muted = composer.getVariable( "muted" )
 --local rightText
 local screenW = display.actualContentWidth
 local screenH = display.actualContentHeight
 local originX, originY = display.screenOriginX, display.screenOriginY
+local left, right
 local rightText
 -- 'onRelease' event listener for playBtn
 local function onPlayBtnRelease( event )
@@ -32,6 +34,7 @@ local function switchScene (event)
 			composer.gotoScene( "menu", "fade", 500 )
 	elseif event.target.objType == "right" then
 		muted = not muted
+		composer.setVariable( "muted", muted )
 		if muted then
 			audio.stop()
 			audio.setVolume(0)
@@ -42,7 +45,6 @@ local function switchScene (event)
 			audio.play( backgroundMusic, { channel=1, loops=-1, fadein=1500} )
 			rightText.text="Mute"
 		end
-		print(muted)
 	end
 end
 
@@ -59,7 +61,7 @@ function scene:create( event )
 	backgroundColor.anchorX = 0
 	backgroundColor.anchorY = 0
 	backgroundColor:setFillColor(0.25,0.13,0.06,1)
-	local background = display.newImageRect( "img/scroll.png", display.actualContentWidth, display.actualContentHeight )
+	local background = display.newImageRect( "img/scroll.png", screenW, screenH*0.9 )
 	background.anchorX = 0
 	background.anchorY = 0
 	background.x = 0 + display.screenOriginX
@@ -111,11 +113,7 @@ function scene:create( event )
 	rightText = display.newText( "Mute", screenW/2, screenH*0.95, native.systemFont, screenW/16)
 	right:setFillColor( 0.77, 0.06, 0.09 )
 	right.objType = "right"
-	if muted then
-		rightText.text = "Unmute"
-	else
-		rightText.text = "Mute"
-	end
+
 	sceneGroup:insert( left )
 	sceneGroup:insert( leftText )
 	sceneGroup:insert( right )
@@ -130,10 +128,11 @@ function scene:show( event )
 
 	if phase == "will" then
 		-- Called when the scene is still off screen and is about to move on screen
+		muted = composer.getVariable( "muted" )
 		if muted then
-			rightText.text="Unmute"
+			rightText.text = "Unmute"
 		else
-			rightText.text="Mute"
+			rightText.text = "Mute"
 		end
 	elseif phase == "did" then
 		-- Called when the scene is now on screen
@@ -166,8 +165,8 @@ function scene:destroy( event )
 	--
 	-- INSERT code here to cleanup the scene
 	-- e.g. remove display objects, remove touch listeners, save state, etc.
-	left:removeEventListener( "tap", switchScene) -- back
-	right:removeEventListener( "tap", switchScene)
+	--left:removeEventListener( "tap", switchScene) -- back
+	--right:removeEventListener( "tap", switchScene)
 	--jump:removeEventListener( "tap", switchScene)
 	if playBtn then
 		playBtn:removeSelf()	-- widgets must be manually removed
