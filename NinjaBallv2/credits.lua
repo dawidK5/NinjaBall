@@ -17,7 +17,13 @@ local widget = require( "widget" )
 local screenW = display.actualContentWidth
 local screenH = display.actualContentHeight
 local originX, originY = display.screenOriginX, display.screenOriginY
-local creditsText = [===================[Ninja Ball
+local creditsText = [===================[
+
+
+
+
+
+Ninja Ball
 
 Created by
 Oscar Bogenberger
@@ -29,15 +35,36 @@ Ronan McMorrow
 Theme from
 playonloop.com
 
+Game Sounds from
+freesounds.org
+
 3d black circle from
 clipart-library.coms
 
 Spring from
-chegg.com
+freepik.com
 
 Background
 simsworkshop.net
 
+Pause from
+icons8.com
+
+Spikes from
+graphic-buffet.com
+
+Shelf from
+opengameart.org
+
+Lightning-
+Background from
+freepik.com
+
+Tower from
+png.pngtree.com
+
+Scroll from
+clipartbest.com
 ]===================]
 local rightText
 local textBox
@@ -86,7 +113,7 @@ function scene:create( event )
 
 )
 
-  local background = display.newImageRect("img/scroll.png", display.actualContentWidth, textBox.height+textBox.height*0.55 )
+  local background = display.newImageRect("img/scroll.png", display.actualContentWidth, textBox.height+textBox.height*0.5 )
   background.anchorX = 0
   background.anchorY = 0
   local left = display.newRect( originX, originY+screenH*0.9, screenW/3, screenH/10 )
